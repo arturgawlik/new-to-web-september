@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>format duration in js</title>
+</head>
+<body>
+    <script type="module">
+        function calcDuration(durationObj, locale, style) {
+            const durationFormater = new Intl.DurationFormat(locale, { style });
+            const duration = durationFormater.format(durationObj);
+            
+            return duration;
+        }
+
+        const hoursEl = document.getElementById("hours")
+        const minutesEl = document.getElementById("minutes")
+        const secondsEl = document.getElementById("seconds")
+        const localeEl = document.getElementById("locale")
+        const styleEl = document.getElementById("style")
+        const buttonEl = document.getElementById("button")
+        const durationEl = document.getElementById("duration")
+        
+        buttonEl.onclick = function() {
+            const duration = calcDuration({ hours: hoursEl.value, minutes: minutesEl.value, seconds: secondsEl.value }, localeEl.value, styleEl.value);
+            durationEl.innerText = duration;
+        }
+        
+    </script>
+
+    <p>
+        duration: <span id="duration"></span>
+    </p>
+    <p>
+        <div>
+            <label>
+                hours:
+                <input id="hours" type="text" value="12">
+            </label>
+        </div>
+        <div>
+            <label>
+                minutes:
+                <input id="minutes" type="text" value="32">
+            </label>
+        </div>
+        <div>
+            <label>
+                seconds:
+                <input id="seconds" type="text" value="53">
+            </label>
+        </div>
+        <div>
+            <label>
+                locale:
+                <input id="locale" type="text" value="pl">
+            </label>
+        </div>
+        <div>
+            <label>
+                style:
+                <input id="style" type="text" value="long">
+            </label>
+        </div>
+        <button id="button">calc duration</button>
+        
+    </p>
+</body>
+</html>
